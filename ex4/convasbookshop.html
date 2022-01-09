@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List OFF booK</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .container {
+            position: fixed;
+            height: auto;
+            margin: 0 3%;
+            width: 100%;
+        }
+        
+        .container_Input {
+            height: 100vh;
+            background-color: rgb(1, 124, 255);
+            color: rgb(21, 4, 95);
+            width: 20%;
+            border-radius: 4px;
+            padding: 5px 15px;
+            margin: 10px 0;
+        }
+        
+        .container_Input input,
+        label {
+            width: 90%;
+            height: 5vh;
+            border-radius: 4px;
+            outline: none;
+            margin: 3px;
+        }
+        
+        .container_Input button {
+            margin-top: 10px;
+            font-size: 15px;
+            width: 60px;
+            height: 40px;
+            padding: 6px;
+        }
+        
+        .container_Input .editBook {
+            visibility: hidden;
+            margin-left: -65px;
+            text-align: center;
+            padding: 5px;
+        }
+        
+        .list {
+            position: relative;
+            margin: 10px 24%;
+            display: flex;
+            flex-wrap: wrap;
+            background-color: rgb(0, 8, 250);
+            width: 75%;
+            height: auto;
+        }
+        
+        .list .item {
+            box-shadow: 0 4px 8px 0 rgba(228, 228, 228, 0.2);
+            transition: 0.3s;
+            width: 23%;
+            margin: 1%;
+            text-align: center;
+            border-radius: 4px;
+            border: 4px solid black;
+            background-color: rgb(120, 9, 247);
+        }
+        
+        .list .item:hover {
+            box-shadow: 0 8px 16px 0 rgba(2, 255, 94, 0.2);
+        }
+        
+        .update_btn {
+            padding: 10px;
+        }
+        
+        .update_btn .edit,
+        .delete {
+            padding: 4px;
+            margin: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="container_Input">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" placeholder="BOOK" />
+            <label for="price">Price</label>
+            <input type="number" name="price" id="perPrice" placeholder="500" />
+            <label for="category">Category</label>
+            <input type="text" name="category" id="category" placeholder="code" />
+
+            <button type="submit" class="addBook" id="addBook">Add</button>
+        
+        </div>
+    </div>
+
+    <div class="list" id="storeList">
+        <!-- preview for the display-->
+        <!-- <div class="item">
+            <div class="updateNews">
+            <img src="./Asset/Image/book.png" alt="book" style="width: 80%;">
+            <div>Name: Book1</div>
+            <div>Price: 1500</div>
+            <div>Category: coding</div>
+            <div class="update_btn">
+                <button class="edit">Edit</button>
+                <button class="delete">Delete</button>
+            </div>
+            </div>
+        </div> -->
+    </div>
+
+    <script>
+        var i = 0;
+        document.getElementById("addBook").addEventListener("click", function() {
+
+            var name = document.getElementById("name").value;
+            var Price = document.getElementById("perPrice").value;
+            var cate = document.getElementById("category").value;
+
+            document.getElementsByClassName('list')[0].innerHTML += `<div class="item"><div class="updateNews"><img src="./Asset/Image/book.png" alt="book" style="width: 80%;"> <div class="name">Name: ${name}</div>  <div class="price">Price: ${Price}</div> <div class="category">Category: ${cate}</div>  <div class="update_btn"> <button class="edit" id="${i}" onclick="editB(this.id)">Edit</button><button class="delete" id="${i}" onclick="deleteB(this.id)">Delete</button></div></div></div>`;
+            i++;
+        })
+
+        function deleteB(id) {
+            console.log(id);
+            console.log("hello u click me");
+            document.getElementsByClassName("item")[id].hidden = true;
+        }
+
+        function editB(id) {
+            document.getElementById('editBook').style.visibility = "visible";
+            document.getElementById('addBook').style.visibility = "hidden";
+            idClass = id;
+
+        }
+        document.getElementById("editBook").addEventListener("click", function() {
+            var name1 = document.getElementById("name").value;
+            var Price1 = document.getElementById("perPrice").value;
+            var cate1 = document.getElementById("category").value;
+
+
+            document.getElementsByClassName("name")[idClass].innerHTML = `name: ${name1}`;
+            document.getElementsByClassName("price")[idClass].innerHTML = `price: ${Price1}`;
+            document.getElementsByClassName("category")[idClass].innerHTML = `category: ${cate1}`;
+
+            document.getElementById('editBook').style.visibility = "hidden";
+            document.getElementById('addBook').style.visibility = "visible";
+        })
+    </script>
+</body>
+
+</html>
